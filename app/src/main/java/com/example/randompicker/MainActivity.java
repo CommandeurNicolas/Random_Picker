@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        items = Item.createItemList(10);
+        //items = Item.createItemList(10);
     }
 
 
