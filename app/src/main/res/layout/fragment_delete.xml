@@ -10,11 +10,4 @@
         android:layout_height="650dp">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/notif_delete"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:textSize="18sp" />
 </LinearLayout>

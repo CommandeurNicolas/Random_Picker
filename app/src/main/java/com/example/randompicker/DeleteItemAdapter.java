@@ -1,16 +1,14 @@
 package com.example.randompicker;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.randompicker.ui.delete.DeleteFragment;
 
 import java.util.List;
 
@@ -21,7 +19,6 @@ public class DeleteItemAdapter extends RecyclerView.Adapter<DeleteItemAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView itemTextView;
-        //public Button deleteButton;
         public ImageView deleteIcon;
 
         public ViewHolder(final View itemView) {
@@ -33,7 +30,17 @@ public class DeleteItemAdapter extends RecyclerView.Adapter<DeleteItemAdapter.Vi
             deleteIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteItem(getAdapterPosition());
+                    int position = getAdapterPosition();
+                    System.out.println("position : "+position);
+
+                    String name = Item.itemList.get(position).getItem();
+                    System.out.println("name : "+name);
+
+                    deleteItem(position);
+
+                    MainActivity.bdd.deleteItem(name);
+
+                    Toast.makeText(itemView.getContext(), "Choix supprimé avec succès", Toast.LENGTH_SHORT).show();
                 }
             });
         }

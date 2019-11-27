@@ -1,5 +1,6 @@
 package com.example.randompicker;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -11,18 +12,24 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.randompicker.bdd.DatabaseHelper;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    private ArrayList<Item> items;
+    private ArrayList<Item> itemList;
+
+    public static DatabaseHelper bdd;
+    private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -40,9 +47,20 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        items = Item.createItemList(10);
-    }
+        bdd = new DatabaseHelper(this);
 
+        itemList = Item.itemList;
+
+
+        cursor = bdd.getText();
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            System.out.println(cursor.getString(0));
+            itemList.add(new Item(cursor.getString(0)));
+        }
+
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,10 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 /*
-    enregistrer données dans json
-    lire json quand ouverture de l'app
-    ecrire json quand fermeture de l'app
+    BDD SQLite
 
     notif supprimmer
 
+    animation number picker
 */

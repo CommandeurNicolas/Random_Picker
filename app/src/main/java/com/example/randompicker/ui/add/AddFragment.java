@@ -11,24 +11,28 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.randompicker.AddItemAdapter;
 import com.example.randompicker.Item;
+import com.example.randompicker.MainActivity;
 import com.example.randompicker.R;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class AddFragment extends Fragment {
 
-    private AddViewModel addViewModel;
     private TextView textNotif;
     private EditText textInsert;
     private Button addButton;
 
-    private ArrayList<Item> items;
+    private ArrayList<Item> itemList;
+
+    private OutputStream os;
+
+    private boolean stop = false;
 
     private int errorColor = 0xFFA83232;
     private int okColor = 0xFF42AD52;
@@ -36,8 +40,6 @@ public class AddFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        addViewModel =
-                ViewModelProviders.of(this).get(AddViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add, container, false);
 
 
@@ -47,13 +49,15 @@ public class AddFragment extends Fragment {
 
         final RecyclerView rvItem = (RecyclerView) root.findViewById(R.id.rvItem);
 
-        items = Item.itemList;
+        itemList = Item.itemList;
 
-        final AddItemAdapter adapter = new AddItemAdapter(items);
+        final AddItemAdapter adapter = new AddItemAdapter(itemList);
 
         rvItem.setAdapter(adapter);
 
-        rvItem.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        //rvItem.setLayoutManager(new LinearLayoutManager(root.getContext()));
+
+        rvItem.setLayoutManager(new GridLayoutManager(root.getContext(), 2));
 
 
 
@@ -61,13 +65,38 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String txt = textInsert.getText().toString();
-                items.add(0, new Item(txt));
-                adapter.notifyItemInserted(0);
-                rvItem.scrollToPosition(0);
+                System.out.println("txt : "+txt);
 
-                textNotif.setBackgroundColor(okColor);
-                textNotif.setTextColor(white);
-                textNotif.setText("\nChoix ajouté avec succès");
+                // PROBLEME ICI
+                Item itemTxt = new Item(txt);
+
+                if (Item.isInside(itemTxt)) {
+                    stop = true;
+                }
+                // NE PASSE PAS A TRUE : a corriger
+
+                // DEBUG
+                System.out.println("stop apres for : "+stop);
+
+                if (stop) {
+                    System.out.println("erreur");
+                    textNotif.setBackgroundColor(errorColor);
+                    textNotif.setTextColor(white);
+                    textNotif.setText("\nErreur : Choix déjà ajouté dans la liste");
+                }
+                else {
+                    System.out.println("ok");
+                    itemList.add(0, new Item(txt));
+                    adapter.notifyItemInserted(0);
+                    rvItem.scrollToPosition(0);
+
+                    textNotif.setBackgroundColor(okColor);
+                    textNotif.setTextColor(white);
+                    textNotif.setText("\nChoix ajouté avec succès");
+
+                    MainActivity.bdd.addData(txt);
+                }
+                stop = false;
             }
         });
 
