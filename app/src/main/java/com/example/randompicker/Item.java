@@ -31,21 +31,4 @@ public class Item {
         return itemList;
     }
 
-
-    // FONCTION CREE POUR ESSAYER DE MAROUFLER LE SYSTEME
-    public static boolean isInside(Item item) {
-
-        boolean b = false;
-
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getItem() == item.getItem()) {
-                b = true;
-            }
-        }
-
-        // NE PASSE PAS A TRUE : a corriger
-        return b;
-    }
-    // CETTE FONCTION PEUT POTENTIELLEMENT DISPARAITRE
-
 }
