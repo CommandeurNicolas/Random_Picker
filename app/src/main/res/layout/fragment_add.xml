@@ -26,15 +26,15 @@
             android:text="@string/add_button" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvItem"
-        android:layout_width="match_parent"
-        android:layout_height="600dp" />
-
     <TextView
         android:id="@+id/notif_add"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

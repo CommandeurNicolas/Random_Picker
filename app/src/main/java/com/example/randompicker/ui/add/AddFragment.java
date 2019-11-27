@@ -65,34 +65,31 @@ public class AddFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String txt = textInsert.getText().toString();
-                System.out.println("txt : "+txt);
 
-                // PROBLEME ICI
-                Item itemTxt = new Item(txt);
-
-                if (Item.isInside(itemTxt)) {
-                    stop = true;
+                for (int i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getItem().equals(txt) || txt.isEmpty()) {
+                        stop = true;
+                    }
                 }
-                // NE PASSE PAS A TRUE : a corriger
-
-                // DEBUG
-                System.out.println("stop apres for : "+stop);
 
                 if (stop) {
-                    System.out.println("erreur");
                     textNotif.setBackgroundColor(errorColor);
                     textNotif.setTextColor(white);
-                    textNotif.setText("\nErreur : Choix déjà ajouté dans la liste");
+                    if (txt.isEmpty()) {
+                        textNotif.setText("\nErreur : Veuillez renseinger le champs ci-dessus\n");
+                    }
+                    else {
+                        textNotif.setText("\nErreur : Choix déjà ajouté dans la liste\n");
+                    }
                 }
                 else {
-                    System.out.println("ok");
                     itemList.add(0, new Item(txt));
                     adapter.notifyItemInserted(0);
                     rvItem.scrollToPosition(0);
 
                     textNotif.setBackgroundColor(okColor);
                     textNotif.setTextColor(white);
-                    textNotif.setText("\nChoix ajouté avec succès");
+                    textNotif.setText("\nChoix ajouté avec succès\n");
 
                     MainActivity.bdd.addData(txt);
                 }

@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
+
         bdd = new DatabaseHelper(this);
 
         itemList = Item.itemList;
@@ -79,9 +81,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 /*
-    BDD SQLite
-
-    notif supprimmer
-
     animation number picker
 */
