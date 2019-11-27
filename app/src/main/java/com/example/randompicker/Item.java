@@ -46,5 +46,6 @@ public class Item {
         // NE PASSE PAS A TRUE : a corriger
         return b;
     }
+    // CETTE FONCTION PEUT POTENTIELLEMENT DISPARAITRE
 
 }
