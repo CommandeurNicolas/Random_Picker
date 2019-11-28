@@ -12,7 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.randompicker.bdd.DatabaseHelper;
+import com.example.randompicker.bdd.Database;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Item> itemList;
 
-    public static DatabaseHelper bdd;
+    public static Database bdd;
     private Cursor cursor;
 
     @Override
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        bdd = new DatabaseHelper(this);
+        bdd = new Database(this);
 
         itemList = Item.itemList;
 
@@ -81,5 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 /*
+    page settings / explication
+
     animation number picker
+
+    couleurs plus mieux bien
 */

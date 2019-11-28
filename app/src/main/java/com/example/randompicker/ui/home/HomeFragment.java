@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,17 +43,22 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Random r = new Random();
+                if (itemList.size() > 0) {
+                    Random r = new Random();
 
-                if (itemList.size() > 1)
-                {
-                    nextItem = r.nextInt(data.length);
+                    if (itemList.size() > 1)
+                    {
+                        nextItem = r.nextInt(data.length);
+                    }
+                    picker.setValue(nextItem);
+
+                    Intent i = new Intent(root.getContext(), Result.class);
+                    i.putExtra("result", itemList.get(nextItem).getItem());
+                    startActivity(i);
                 }
-                picker.setValue(nextItem);
-
-                Intent i = new Intent(root.getContext(), Result.class);
-                i.putExtra("result", itemList.get(nextItem).getItem());
-                startActivity(i);
+                else {
+                    Toast.makeText(root.getContext(), "Veuillez rentrer des activités avant de lancer l'aléatoire", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

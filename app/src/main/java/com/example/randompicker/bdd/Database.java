@@ -6,14 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String TAG = "DatabaseHelper";
+public class Database extends SQLiteOpenHelper {
+    private static final String TAG = "Database";
 
     private static final String TABLE_NAME = "events";
     private static final String COLUMN_0 = "id_action";
     private static final String COLUMN_1 = "text";
 
-    public DatabaseHelper(Context context){
+    public Database(Context context){
         super(context, TABLE_NAME, null, 1);
     }
 
