@@ -18,13 +18,7 @@ import java.util.ArrayList;
 
 public class DeleteFragment extends Fragment {
 
-    //public TextView textNotif;
-
     private ArrayList<Item> itemList;
-
-    private int errorColor = 0xFFA83232;
-    private int okColor = 0xFF42AD52;
-    private int white = 0xFFFFFFFF;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -35,17 +29,7 @@ public class DeleteFragment extends Fragment {
         itemList = Item.itemList;
         final DeleteItemAdapter adapter = new DeleteItemAdapter(itemList);
         rvItem.setAdapter(adapter);
-        //rvItem.setLayoutManager(new LinearLayoutManager(root.getContext()));
         rvItem.setLayoutManager(new GridLayoutManager(root.getContext(), 2));
-
-
-        /*
-        textNotif = (TextView) root.findViewById(R.id.notif_delete);
-
-        textNotif.setBackgroundColor(okColor);
-        textNotif.setTextColor(white);
-        textNotif.setText("Choix supprimé avec succès\nFAIRE EN SORTE QUE QUAND JE CLICK SUR UNE POUBELLE ÇA CHANGE CET ETAT");
-         */
 
         return root;
     }

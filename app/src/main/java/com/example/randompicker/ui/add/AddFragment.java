@@ -55,8 +55,6 @@ public class AddFragment extends Fragment {
 
         rvItem.setAdapter(adapter);
 
-        //rvItem.setLayoutManager(new LinearLayoutManager(root.getContext()));
-
         rvItem.setLayoutManager(new GridLayoutManager(root.getContext(), 2));
 
 
